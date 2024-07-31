@@ -1,4 +1,4 @@
-package com.morpheus 
+package com.morpheus
 
 import groovy.json.*
 import groovy.json.JsonOutput
@@ -21,12 +21,12 @@ def findKeys(String searchKey, Map spec, Map foundKeys = [:]) {
     return foundKeys
 }
 
-def searchKey = "hostname"                     // searching for all keys in the config spec that have "hostname" in any part of the key's name
+def searchKey = "hostname"
 def result = findKeys(searchKey, spec)
 def matches = JsonOutput.prettyPrint(JsonOutput.toJson(result))
 
 println """
-    =================== CONFIG SPEC =========================
+    ========================= CONFIG SPEC =========================
 
     \t${spec}
 
@@ -34,19 +34,17 @@ println """
 
 try {
 	println """
-    =================== SPEC MATCHES FOR ${searchKey} ===================
+    ========================= SPEC MATCHES FOR ${searchKey} =========================
     
     \t${matches}
     
     """
 } catch (Exception e) {
-	println "Key not found in spec"
+    println "Key not found in spec"
     println "${e}"
     println "${e.printStackTrace()}"
 }
 
-// and then proceed with update e.g. to update hostname in the spec:
-// 
+// Example of updating a hostname in the spec
 // def hostNameOverride = "ueqbal"
-// spec.hostName = hostNameOverride          (wrap in a try-catch in the final code)
-//
+// spec.hostName = hostNameOverride
